@@ -29,6 +29,7 @@ public class HomeController {
     @RequestMapping("/")
     public String index(Model model) {
         model.addAttribute("title", "MyJobs");
+        model.addAttribute(jobRepository);
         return "index";
     }
 
@@ -43,11 +44,11 @@ public class HomeController {
 
     @PostMapping("add")
     public String processAddJobForm(@ModelAttribute @Valid Job newJob,
-                                    Errors errors, Model model, @RequestParam("employerId") int employerId, @RequestParam("skills") List<Integer> skills) {
+                                    Errors errors, Model model, @RequestParam("employerId") int employerId, @RequestParam List<Integer> skills) {
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Job");
             model.addAttribute("employers", employerRepository.findAll());
-            model.addAttribute("skills", skillRepository.findAll());
+            model.addAttribute("skills", skillRepository.findAllById(skills));
             model.addAttribute("jobs", jobRepository.findAll());
             return "add";
         }

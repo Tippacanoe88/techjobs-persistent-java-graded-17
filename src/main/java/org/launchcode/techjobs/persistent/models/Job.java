@@ -3,6 +3,7 @@ package org.launchcode.techjobs.persistent.models;
 import jakarta.persistence.*;
 import org.launchcode.techjobs.persistent.models.AbstractEntity;
 import org.launchcode.techjobs.persistent.models.Employer;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Objects;
@@ -23,7 +24,7 @@ public class Job extends AbstractEntity {
     public Job() {
     }
 
-    public Job(Employer employer, List<Skill> skills) {
+    public Job(Employer employer, @RequestParam List<Skill> skills) {
         super();
         this.employer = employer;
         this.skills = skills;
@@ -49,8 +50,8 @@ public class Job extends AbstractEntity {
     public String toString() {
         return "Job{" +
                 "id=" + getId() +
-                ", employer='" + employer + '\'' +
-                ", skills='" + skills +
+                ", employer=" + employer + '\'' +
+                ", skills=" + skills +
                 '}';
     }
 
